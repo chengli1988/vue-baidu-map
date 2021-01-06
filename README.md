@@ -1,47 +1,52 @@
 # VUE BAIDU MAP
 
-<p align="center">
-  <img src="https://dafrok.github.io/vue-baidu-map/favicon.png" width="200px">
-</p>
-<p align="center">Baidu Map components for Vue 2.x</p>
+## 声明
 
-[![npm](https://img.shields.io/npm/v/vue-baidu-map.svg)]()
-[![Travis](https://img.shields.io/travis/Dafrok/vue-baidu-map.svg)]()
-[![Package Quality](http://npm.packagequality.com/shield/vue-baidu-map.svg)](http://packagequality.com/#?package=vue-baidu-map)
-[![npm](https://img.shields.io/npm/dm/vue-baidu-map.svg)]()
-[![license](https://img.shields.io/github/license/dafrok/vue-baidu-map.svg)]()
+基于大神 [Dafrok](https://dafrok.github.io) 开发的VUE 2.x 的百度地图组件：[vue-baidu-map](https://dafrok.github.io/vue-baidu-map) 的升级。
 
-## Languages
+相关文档：[https://dafrok.github.io/vue-baidu-map](https://dafrok.github.io/vue-baidu-map)
 
-- [中文](https://github.com/Dafrok/vue-baidu-map/blob/master/README.zh.md)
-- [English](https://github.com/Dafrok/vue-baidu-map/blob/master/README.md)
+如遇文档打不开的情况，尝试使用以下DNS：
 
-## Documentation
+223.5.5.5
 
-[https://dafrok.github.io/vue-baidu-map](https://dafrok.github.io/vue-baidu-map)
+223.6.6.6
 
-## Get Start
 
-### Installation
+## 版本说明
+
+0.0.7
+
+修改 components/map/Map.vue 
+
+1.升级api版本 2.0 => 3.0
+
+2.移除 theme 属性
+
+3.增加 mapStyleId 属性，支持通过设置styleId设置 [个性化地图](https://lbsyun.baidu.com/index.php?title=jspopular3.0/guide/custom)
+
+
+## 开始
+
+### 安装
 
 ```bash
-npm i --save vue-baidu-map
+npm i --save @chengli1988/vue-baidu-map
 ```
 
-### Initialization
+### 初始化
 
 ```javascript
 import Vue from 'vue'
-import BaiduMap from 'vue-baidu-map'
+import BaiduMap from '@chengli1988/vue-baidu-map'
 
 Vue.use(BaiduMap, {
-  /* Visit http://lbsyun.baidu.com/apiconsole/key for details about app key. */
+  // ak 是在百度地图开发者平台申请的密钥
   ak: 'YOUR_APP_KEY'
 })
 ```
 
-### Usage
-
+### 使用
 ```vue
 <template>
   <baidu-map class="map">
@@ -49,21 +54,14 @@ Vue.use(BaiduMap, {
 </template>
 
 <style>
-/* The container of BaiduMap must be set width & height. */
+/* 地图容器必须设置宽和高属性 */
 .map {
-  width: 100%;
+  width: 400px;
   height: 300px;
 }
 </style>
 ```
 
-## Contributing
+## 协议
 
-[Contributing Guide](https://github.com/Dafrok/vue-baidu-map/blob/master/CONTRIBUTING.md)
-
-
-## License
-
-[MIT License](https://opensource.org/licenses/MIT)
-
-Copyright (c) 2016-present, Dafrok <o.o@mug.dog>
+[MIT 许可证](https://opensource.org/licenses/MIT)

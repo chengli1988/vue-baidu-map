@@ -1,5 +1,7 @@
-dist
-docs
-_docs
-coverage
-.babelrc
+.DS_Store
+node_modules/
+src/
+babel.config.js
+vue.config.js
+*.map
+*.html
