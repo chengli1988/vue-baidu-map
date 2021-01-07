@@ -196,8 +196,9 @@ export default {
     },
     mapStyleId(val) {
       const {map} = this
-      map.setMapStyleV2({ styleId: val })
-      console.log(val)
+      if (val) {
+        map.setMapStyleV2({ styleId: val })
+      }
     }
   },
   methods: {
@@ -228,13 +229,14 @@ export default {
       }
       const map = new BMap.Map($el, {enableHighResolution: this.highResolution, enableMapClick: this.mapClick})
       this.map = map
-      const {setMapOptions, zoom, getCenterPoint, mapStyleId, mapStyle } = this
+      const {setMapOptions, zoom, getCenterPoint, mapStyle } = this
       
       setMapOptions()
       bindEvents.call(this, map)
       map.centerAndZoom(getCenterPoint(), zoom)
 
       // setMapStyleV2方法需要在地图初始化（centerAndZoom）完成后执行；
+      let mapStyleId = this.mapStyleId || this._BMap().mapStyleId
       mapStyleId ? map.setMapStyleV2({"styleId": mapStyleId}) : map.setMapStyle(mapStyle)
 
       this.$emit('ready', {BMap, map})
@@ -275,8 +277,7 @@ export default {
     },
     reset () {
       const {getMapScript, initMap} = this
-      getMapScript()
-        .then(initMap)
+      getMapScript().then(initMap)
     }
   },
   mounted () {

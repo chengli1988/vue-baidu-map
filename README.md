@@ -12,20 +12,6 @@
 
 223.6.6.6
 
-
-## 版本说明
-
-0.0.7
-
-修改 components/map/Map.vue 
-
-1.升级api版本 2.0 => 3.0
-
-2.移除 theme 属性
-
-3.增加 mapStyleId 属性，支持通过设置styleId设置 [个性化地图](https://lbsyun.baidu.com/index.php?title=jspopular3.0/guide/custom)
-
-
 ## 开始
 
 ### 安装
@@ -42,7 +28,9 @@ import BaiduMap from '@chengli1988/vue-baidu-map'
 
 Vue.use(BaiduMap, {
   // ak 是在百度地图开发者平台申请的密钥
-  ak: 'YOUR_APP_KEY'
+  ak: 'YOUR_APP_KEY',
+  // 个性化地图styleId 可选配置
+  mapStyleId: 'YOUR_STYLE_ID'
 })
 ```
 
@@ -61,6 +49,27 @@ Vue.use(BaiduMap, {
 }
 </style>
 ```
+
+## 版本说明
+
+### 0.0.9
+
+1.增加 mapStyleId 全局配置属性，支持统一设置 mapStyleId ，优先级：组件mapStyleId > 全局mapStyleId
+
+### 0.0.7 == 0.0.8
+
+修改 components/map/Map.vue 
+
+1.升级api版本 2.0 => 3.0
+
+2.移除 theme 属性
+
+3.增加 mapStyleId 属性，支持通过设置styleId设置 [个性化地图](https://lbsyun.baidu.com/index.php?title=jspopular3.0/guide/custom)
+
+### 0.0.1 ~ 0.0.6
+
+1.移植[vue-baidu-map](https://dafrok.github.io/vue-baidu-map)代码
+
 
 ## 协议
 
