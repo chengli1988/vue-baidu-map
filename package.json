@@ -1,10 +1,11 @@
 {
   "name": "@chengli1988/vue-baidu-map",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "private": false,
   "author": "chenshujie",
   "license": "MIT",
   "main": "dist/vue-baidu-map.umd.min.js",
+  "keywords":["vue baidu map"],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",

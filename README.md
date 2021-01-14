@@ -52,6 +52,14 @@ Vue.use(BaiduMap, {
 
 ## 版本说明
 
+### 0.0.10
+
+1.移除mapStyle属性
+
+2.增加mapStyleJson属性，支持通过设置styleJson设置 [个性化地图](https://lbsyun.baidu.com/index.php?title=jspopular3.0/guide/custom)
+
+3.优化代码
+
 ### 0.0.9
 
 1.增加 mapStyleId 全局配置属性，支持统一设置 mapStyleId ，优先级：组件mapStyleId > 全局mapStyleId
@@ -66,10 +74,7 @@ Vue.use(BaiduMap, {
 
 3.增加 mapStyleId 属性，支持通过设置styleId设置 [个性化地图](https://lbsyun.baidu.com/index.php?title=jspopular3.0/guide/custom)
 
-### 0.0.1 ~ 0.0.6
-
-1.移植[vue-baidu-map](https://dafrok.github.io/vue-baidu-map)代码
-
+[更多历史版本](https://github.com/chengli1988/vue-baidu-map/blob/master/version.md)
 
 ## 协议
 

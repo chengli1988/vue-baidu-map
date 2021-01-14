@@ -74,28 +74,21 @@ export default {
     mapStyleId: {
       type: String
     },
-    mapStyle: {
-      type: Object
+    mapStyleJson: {
+      type: Array
     }
   },
   watch: {
-    center (val, oldVal) {
-      const {map, zoom} = this
-      if (checkType(val) === 'String' && val !== oldVal) {
-        map.centerAndZoom(val, zoom)
-      }
-    },
-    'center.lng' (val, oldVal) {
-      const {BMap, map, zoom, center} = this
-      if (val !== oldVal && val >= -180 && val <= 180) {
-        map.centerAndZoom(new BMap.Point(val, center.lat), zoom)
-      }
-    },
-    'center.lat' (val, oldVal) {
-      const {BMap, map, zoom, center} = this
-      if (val !== oldVal && val >= -74 && val <= 74) {
-        map.centerAndZoom(new BMap.Point(center.lng, val), zoom)
-      }
+    center: {
+      handler(val) {
+        const {BMap, map, zoom} = this
+        if (checkType(val) === 'String') {
+          map.centerAndZoom(val, zoom)
+        } else {
+          map.centerAndZoom(new BMap.Point(val.lng, val.lat), zoom)
+        }
+      },
+      deep: true
     },
     zoom (val, oldVal) {
       const {map} = this
@@ -153,51 +146,16 @@ export default {
       const {map} = this
       val ? map.enableAutoResize() : map.disableAutoResize()
     },
-    theme (val) {
-      const {map} = this
-      map.setMapStyle({styleJson: val})
-    },
-    'mapStyle.features': {
-      handler (val, oldVal) {
-        const {map, mapStyle} = this
-        const {style, styleJson} = mapStyle
-        map.setMapStyle({
-          styleJson,
-          features: val,
-          style
-        })
-      },
-      deep: true
-    },
-    'mapStyle.style' (val, oldVal) {
-      const {map, mapStyle} = this
-      const {features, styleJson} = mapStyle
-      map.setMapStyle({
-        styleJson,
-        features,
-        style: val
-      })
-    },
-    'mapStyle.styleJson': {
-      handler (val, oldVal) {
-        const {map, mapStyle} = this
-        const {features, style} = mapStyle
-        map.setMapStyle({
-          styleJson: val,
-          features,
-          style
-        })
-      },
-      deep: true
-    },
-    mapStyle (val) {
-      const {map, mapStyleId} = this
-      !mapStyleId && map.setMapStyleV2(val)
-    },
-    mapStyleId(val) {
-      const {map} = this
+    mapStyleId (val) {
       if (val) {
+        const {map} = this
         map.setMapStyleV2({ styleId: val })
+      }
+    },
+    mapStyleJson (val) {
+      if (val) {
+        const {map, mapStyleId} = this
+        !mapStyleId && map.setMapStyleV2({ styleJson: val })
       }
     }
   },
@@ -229,15 +187,20 @@ export default {
       }
       const map = new BMap.Map($el, {enableHighResolution: this.highResolution, enableMapClick: this.mapClick})
       this.map = map
-      const {setMapOptions, zoom, getCenterPoint, mapStyle } = this
+      const {setMapOptions, zoom, getCenterPoint } = this
       
       setMapOptions()
       bindEvents.call(this, map)
       map.centerAndZoom(getCenterPoint(), zoom)
 
+      const {mapStyleId, mapStyleJson } = this
       // setMapStyleV2方法需要在地图初始化（centerAndZoom）完成后执行；
-      let mapStyleId = this.mapStyleId || this._BMap().mapStyleId
-      mapStyleId ? map.setMapStyleV2({"styleId": mapStyleId}) : map.setMapStyle(mapStyle)
+      let styleId = mapStyleId || this._BMap().mapStyleId
+      if (styleId) {
+        map.setMapStyleV2({"styleId": styleId})
+      } else if (mapStyleJson) {
+        map.setMapStyleV2({styleJson: mapStyleJson})
+      }
 
       this.$emit('ready', {BMap, map})
     },
