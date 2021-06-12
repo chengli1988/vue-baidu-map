@@ -197,15 +197,16 @@ export default {
       // setMapStyleV2方法需要在地图初始化（centerAndZoom）完成后执行；
       let styleId = mapStyleId || this._BMap().mapStyleId
       if (styleId) {
-        map.setMapStyleV2({"styleId": styleId})
+        map.setMapStyleV2({styleId: styleId})
       } else if (mapStyleJson) {
         map.setMapStyleV2({styleJson: mapStyleJson})
       }
 
-      this.$emit('ready', {BMap, map})
+      const center =  this._BMap().center
+      this.$emit('ready', {BMap, map, center })
     },
     getCenterPoint () {
-      const {center, BMap} = this
+      let {center, BMap} = this
       switch (checkType(center)) {
         case 'String': return center
         case 'Object': return new BMap.Point(center.lng, center.lat)

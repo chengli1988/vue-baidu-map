@@ -37,8 +37,8 @@ import BmlCurveLine from './extra/CurveLine.vue'
 
 export default {
   install (Vue, options) {
-    const {ak, mapStyleId} = options
-    Vue.prototype._BMap = () => ({ak, mapStyleId})
+    const {ak, mapStyleId, center} = options
+    Vue.prototype._BMap = () => ({ak, mapStyleId, center})
 
     Vue.component('baidu-map', BaiduMap)
     Vue.component('bm-view', BmView)

@@ -4,24 +4,42 @@
     <button @click="changeStyleJson">更改StyleJson</button>
     <button @click="changeMapCenterStr">更改地图中心</button>
     <button @click="changeMapCenter">更改地图中心</button>
-    <baidu-map :center="center" :zoom="zoom" :mapStyleId="mapStyleId" :mapStyleJson="mapStyleJson" style="width: 100%; height: 400px;"></baidu-map>
+    <button @click="changeOverlay">changeOverlay</button>
+    <baidu-map :center="center" :zoom="zoom" :mapStyleId="mapStyleId" :mapStyleJson="mapStyleJson" style="width: 100%; height: 400px;" @ready="initMap">
+      <my-overlay v-for="(item, index) in oldOverlays" :key="index" :overlay="item"></my-overlay>
+    </baidu-map>
   </div>
 </template>
 <script>
+import MyOverlay from "./MyOverlay.vue"
 export default {
   name: 'App',
+  components: {
+    MyOverlay
+  },
   data() {
     return {
-      center: {
-        lng: 116.404,
-        lat: 39.915
-      },
+      center: {},
       zoom: 13,
       mapStyleId: "",
-      mapStyleJson: []
+      mapStyleJson: [],
+      oldOverlays:[
+        {lng: 116.444, lat: 39.915},
+        {lng: 116.434, lat: 39.914},
+        {lng: 116.424, lat: 39.913}
+      ],
+      newOverlays:[
+        {lng:  116.404, lat: 39.916},
+      ]
     }
   },
   methods: {
+    initMap({center}) {
+      this.center = center
+    },
+    changeOverlay() {
+      this.oldOverlays = this.newOverlays
+    },
     changeMapCenter() {
       this.center = {
         lng: 116.404,

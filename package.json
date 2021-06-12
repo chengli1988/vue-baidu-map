@@ -1,6 +1,6 @@
 {
   "name": "@chengli1988/vue-baidu-map",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "private": false,
   "author": "chenshujie",
   "license": "MIT",
@@ -17,7 +17,6 @@
     "bmaplib.heatmap": "^1.0.4",
     "bmaplib.lushu": "^1.0.7",
     "bmaplib.markerclusterer": "^1.0.13",
-    "core-js": "^3.6.5",
     "vue": "^2.6.11"
   },
   "devDependencies": {

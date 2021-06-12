@@ -2,6 +2,7 @@
 node_modules/
 src/
 babel.config.js
+version.md
 vue.config.js
 *.map
 *.html
